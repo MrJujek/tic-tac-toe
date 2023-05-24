@@ -1,5 +1,5 @@
-// example.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GameBoardService } from '../../services/gameBoard.service';
 
 @Component({
   selector: 'ai',
@@ -8,8 +8,19 @@ import { Component } from '@angular/core';
 })
 export class ai {
   text = "Hello World";
+  gameBoardArray: string[][] = [[]];
+  gameBoardService: GameBoardService;
+
+  constructor() {
+    console.log("ai.component.ts - constructor");
+
+    this.gameBoardService = new GameBoardService();
+    this.gameBoardArray = this.gameBoardService.getGameBoardArray();
+  }
 
   countMove() {
+    console.log("ai.component.ts - countMove");
+
 
     let x5 = []
     let x4 = []
@@ -26,120 +37,96 @@ export class ai {
     // let closestToMiddleX = 0
     // let closestToMiddleY = 0
 
-    let board_8x8 = [
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 0
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 1
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 2
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 3
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 4
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 5
-      // ["_", "_", "_", "_", "_", "_", "_", "_"], // 6
-      // ["_", "_", "_", "_", "_", "_", "_", "_"]  // 7
-      //0    1    2    3    4    5    6    7
-      ["7", "a", "b", "c", "d", "e", "f", "g"],// 0
-      ["6", "7", "a", "b", "c", "d", "e", "f"],// 1
-      ["5", "6", "7", "a", "b", "c", "d", "e"],// 2
-      ["4", "5", "6", "7", "a", "b", "c", "d"],// 3
-      ["3", "4", "5", "6", "7", "a", "b", "c"],// 4
-      ["2", "3", "4", "5", "6", "7", "a", "b"],// 5
-      ["1", "2", "3", "4", "5", "6", "7", "a"],// 6
-      ["0", "1", "2", "3", "4", "5", "6", "9"] // 7
-      // [1, 2, 3],
-      // [4, 5, 6],
-      // [7, 8, 9]
-    ];
-
-    document.write("<pre>")
 
     //z lewej gory w prawy dol
     {
-      document.write("<b class='ktory'>1.</b><br>")
-      for (let minus = 0; minus < board_8x8.length; minus++) {
-        document.write(minus.toString(), "|  ");
-        for (let i = 0; i < board_8x8.length; i++) {
-          for (let j = 0; j < board_8x8.length; j++) {
+      console.log("<b class='ktory'>1.</b><br>")
+      for (let minus = 0; minus < this.gameBoardArray.length; minus++) {
+        console.log(minus.toString(), "|  ");
+        for (let i = 0; i < this.gameBoardArray.length; i++) {
+          for (let j = 0; j < this.gameBoardArray.length; j++) {
             if (i - minus == j) {
               // console.log("a1");
-              document.write(board_8x8[i][j])
+              console.log(this.gameBoardArray[i][j])
             }
           }
         }
-        document.write("<br>")
+        console.log("<br>")
       }
 
-      document.write("<b class='ktory'>2.</b><br>")
-      for (let plus = 1; plus < board_8x8.length; plus++) {
-        document.write(plus.toString(), "|  ");
-        for (let i = 0; i < board_8x8.length; i++) {
-          for (let j = 0; j < board_8x8.length; j++) {
+      console.log("<b class='ktory'>2.</b><br>")
+      for (let plus = 1; plus < this.gameBoardArray.length; plus++) {
+        console.log(plus.toString(), "|  ");
+        for (let i = 0; i < this.gameBoardArray.length; i++) {
+          for (let j = 0; j < this.gameBoardArray.length; j++) {
             if (i + plus == j) {
               // console.log("a2");
-              document.write(board_8x8[i][j])
+              console.log(this.gameBoardArray[i][j])
             }
           }
         }
-        document.write("<br>")
+        console.log("<br>")
       }
     }
 
-    document.write("<hr>")
+    console.log("<hr>")
 
     //z prawej gory w dol lewo
     {
-      document.write("<b class='ktory'>3.</b><br>")
-      for (let minus = 1; minus <= board_8x8.length; minus++) {
-        document.write(minus.toString(), "*|  ");
-        for (let i = board_8x8.length - 1; i >= 0; i--) {
-          for (let j = board_8x8.length - 1; j >= 0; j--) {
-            if (i + j == board_8x8.length - minus) {
+      console.log("<b class='ktory'>3.</b><br>")
+      for (let minus = 1; minus <= this.gameBoardArray.length; minus++) {
+        console.log(minus.toString(), "*|  ");
+        for (let i = this.gameBoardArray.length - 1; i >= 0; i--) {
+          for (let j = this.gameBoardArray.length - 1; j >= 0; j--) {
+            if (i + j == this.gameBoardArray.length - minus) {
               // console.log("b1");
-              document.write(board_8x8[j][i])
+              console.log(this.gameBoardArray[j][i])
             }
           }
         }
-        document.write("<br>")
+        console.log("<br>")
       }
 
-      document.write("<b class='ktory'>4.</b><br>")
-      for (let plus = 0; plus < board_8x8.length - 1; plus++) {
-        document.write(plus.toString(), "*|  ");
-        for (let i = board_8x8.length - 1; i > 0; i--) {
-          for (let j = board_8x8.length - 1; j > 0; j--) {
-            if (i + j == board_8x8.length + plus) {
+      console.log("<b class='ktory'>4.</b><br>")
+      for (let plus = 0; plus < this.gameBoardArray.length - 1; plus++) {
+        console.log(plus.toString(), "*|  ");
+        for (let i = this.gameBoardArray.length - 1; i > 0; i--) {
+          for (let j = this.gameBoardArray.length - 1; j > 0; j--) {
+            if (i + j == this.gameBoardArray.length + plus) {
               // console.log("b2");
-              document.write(board_8x8[j][i])
+              console.log(this.gameBoardArray[j][i])
             }
           }
         }
-        document.write("<br>")
+        console.log("<br>")
       }
     }
 
-    document.write("<hr>")
+    console.log("<hr>")
 
     //pionowo i poziomo
     {
-      document.write("<b class='ktory'>5.</b><br>")
-      for (let i = 0; i < board_8x8.length; i++) {
-        document.write(i.toString(), "|  ");
-        for (let j = 0; j < board_8x8.length; j++) {
-          document.write(board_8x8[j][i])
+      console.log("<b class='ktory'>5.</b><br>")
+      for (let i = 0; i < this.gameBoardArray.length; i++) {
+        console.log(i.toString(), "|  ");
+        for (let j = 0; j < this.gameBoardArray.length; j++) {
+          console.log(this.gameBoardArray[j][i])
         }
-        document.write("<br>");
+        console.log("<br>");
       }
 
-      document.write("<b class='ktory'>6.</b><br>")
-      for (let i = 0; i < board_8x8.length; i++) {
-        document.write(i.toString(), "|  ");
-        for (let j = 0; j < board_8x8.length; j++) {
-          document.write(board_8x8[i][j])
+      console.log("<b class='ktory'>6.</b><br>")
+      for (let i = 0; i < this.gameBoardArray.length; i++) {
+        console.log(i.toString(), "|  ");
+        for (let j = 0; j < this.gameBoardArray.length; j++) {
+          console.log(this.gameBoardArray[i][j])
         }
-        document.write("<br>");
+        console.log("<br>");
       }
     }
 
 
-    document.write("<hr>* - numerek nie oznacza rzedu")
+    console.log("<hr>* - numerek nie oznacza rzedu")
     /**
      * "_" - puste
      * "X" - x

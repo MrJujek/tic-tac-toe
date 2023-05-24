@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ai } from './components/ai/ai.component';
+import { GameBoardService } from './services/gameBoard.service';
+
 // import { makeMove } from './features/makeMove.service';
 @Component({
   selector: 'app-root',
@@ -13,6 +15,9 @@ export class AppComponent {
   ai = new ai();
   columns: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
   rows: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
+
+  constructor(private gameBoardService: GameBoardService) { }
+
 
   ngOnInit() {
     this.ai.countMove();
