@@ -1,3 +1,26 @@
-h5 {
-  color: red;
+table.board {
+  td {
+    padding: 10px;
+  }
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border: 1px solid black;
+  padding: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.win-cell {
+  background-color: #ccc;
 }

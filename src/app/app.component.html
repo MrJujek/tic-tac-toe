@@ -1,17 +1,26 @@
-{{text1}}
+<div>
+  Columns:<input type="text" [(ngModel)]="columnInput" value="20"><br>
+  Rows:<input type="text" [(ngModel)]="rowInput" value="20"><br>
+  <button (click)="start()">Start</button>
+</div>
 
-<div (click)="click1()">Count: {{count1}}</div>
+<table border=1>
+  <tr *ngFor="let row of rows; let rowIndex = index">
+    <td *ngFor="let column of columns; let columnIndex = index" (click)="makeMove(rowIndex, columnIndex)"
+      [ngClass]="{ 'win-cell': isWinCell(rowIndex, columnIndex) }">
+      {{ getCellValue(rowIndex, columnIndex) }}
 
-<table>
-  <tr>
-    <th></th>
-    <!-- Header row -->
-    <th *ngFor="let column of columns">{{ column }}</th>
-  </tr>
-  <!-- Table rows -->
-  <tr *ngFor="let row of rows">
-    <th>{{ row }}</th>
-    <!-- Table cells -->
-    <td *ngFor="let column of columns">{{ row * column }}</td>
+    </td>
   </tr>
 </table>
+
+<div *ngIf="gameOver">
+  <h2 *ngIf="winner === 'Draw'">It's a draw!</h2>
+  <h2 *ngIf="winner !== 'Draw'">Player {{ winner }} wins!</h2>
+</div>
+
+<div>
+  <h3>Player Scores:</h3>
+  <p>Player X: {{ playerScores['X'] }}</p>
+  <p>Player O: {{ playerScores['O'] }}</p>
+</div>
