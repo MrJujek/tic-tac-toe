@@ -17,6 +17,14 @@ export class AppComponent {
   playerScores: { [key: string]: number } = { X: 0, O: 0 };
   winningScore: number = 5;
 
+  x4: any[] = []
+  x3: any[] = []
+  x2: any[] = []
+
+  o4: any[] = []
+  o3: any[] = []
+  o2: any[] = []
+
   start() {
     console.log("start");
 
@@ -41,6 +49,7 @@ export class AppComponent {
     return cellValues;
   }
 
+  // handle click on cell
   makeMove(row: number, column: number) {
     if (!this.gameOver && this.cellValues[row][column] == '') {
       this.cellValues[row][column] = this.currentPlayer;
@@ -48,7 +57,6 @@ export class AppComponent {
       console.log("makeMove");
       this.ai()
 
-      // this.checkWinCondition(row, column);
       if (!this.gameOver) {
         this.switchPlayer();
         this.makeComputerMove();
@@ -56,6 +64,7 @@ export class AppComponent {
     }
   }
 
+  // ai
   ai() {
     console.log("ai");
 
@@ -64,6 +73,14 @@ export class AppComponent {
       this.setDraw();
       return;
     }
+
+    this.x4 = []
+    this.x3 = []
+    this.x2 = []
+
+    this.o4 = []
+    this.o3 = []
+    this.o2 = []
 
     let array = []
 
@@ -157,6 +174,21 @@ export class AppComponent {
 
   // ruch komputera (na razie losowo)
   makeComputerMove() {
+    console.log(this.x4);
+    console.log(this.x3);
+    console.log(this.x2);
+
+    console.log(this.o4);
+    console.log(this.o3);
+    console.log(this.o2);
+
+    if (this.playerScores["X"] > this.playerScores["O"]) {
+      console.log("wygrywa gracz lub remis");
+
+    } else {
+      console.log("wygrywa ai");
+    }
+
     const emptyCells = [];
     for (let i = 0; i < this.rows.length; i++) {
       for (let j = 0; j < this.columns.length; j++) {
@@ -222,6 +254,7 @@ export class AppComponent {
     }
   }
 
+  // sprawdza linie w rzędzie
   checkForLine(array: any[]) {
     for (let k = 0; k < array.length; k++) {
       if (array[k].value != '' && (array[k].value == "X" || array[k].value == "O") && k + this.winningScore <= array.length) {
@@ -245,5 +278,52 @@ export class AppComponent {
         }
       }
     }
+
+    let resultArr = [] as any[];
+    let currentArr = [] as any[];
+
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].value != '' && (array[i].value == "X" || array[i].value == "O")) {
+        if (i + 1 < array.length && (array[i].value != array[i + 1].value)) {
+          if (currentArr.length > 0) {
+            currentArr.push(array[i]);
+            resultArr.push(currentArr);
+          }
+          currentArr = [];
+        } else {
+          currentArr.push(array[i]);
+        }
+        if (i === array.length - 1 && currentArr.length > 0) {
+          currentArr.push(array[i]);
+          resultArr.push(currentArr);
+        }
+      }
+    }
+
+    resultArr.forEach((arr) => {
+      switch (arr.length) {
+        case 2:
+          if (arr[0].value == 'X') {
+            this.x2.push(arr);
+          } else {
+            this.o2.push(arr);
+          }
+          break;
+        case 3:
+          if (arr[0].value == 'X') {
+            this.x3.push(arr);
+          } else {
+            this.o3.push(arr);
+          }
+          break;
+        case 4:
+          if (arr[0].value == 'X') {
+            this.x4.push(arr);
+          } else {
+            this.o4.push(arr);
+          }
+          break;
+      }
+    })
   }
 }
