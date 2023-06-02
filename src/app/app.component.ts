@@ -59,133 +59,101 @@ export class AppComponent {
   }
 
   ai() {
+    console.log("ai");
+
     // Check for a draw
     if (this.isBoardFull()) {
       this.setDraw();
       return;
     }
 
-    // console.log("ai");
-
     let array = []
 
-    // //z lewej dol w gore prawo
-    // for (let minus = 0; minus < this.cellValues.length; minus++) {
-    //   for (let i = 0; i < this.cellValues.length; i++) {
-    //     for (let j = 0; j < this.cellValues.length; j++) {
-    //       if (i - minus == j) {
-    //         // console.log(this.cellValues[i][j])
-    //         array.push(this.cellValues[i][j])
-    //       }
-    //     }
-    //   }
-    // }
-    // console.log(array)
+    //z lewej dol w gore prawo
+    for (let minus = 0; minus < this.cellValues.length; minus++) {
+      array = []
 
-    // array = []
-    // for (let plus = 1; plus < this.cellValues.length; plus++) {
-    //   for (let i = 0; i < this.cellValues.length; i++) {
-    //     for (let j = 0; j < this.cellValues.length; j++) {
-    //       if (i + plus == j) {
-    //         // console.log(this.cellValues[i][j])
-    //         array.push(this.cellValues[i][j])
-    //       }
-    //     }
-    //   }
-    // }
-    // console.log(array)
+      for (let i = 0; i < this.cellValues.length; i++) {
+        for (let j = 0; j < this.cellValues.length; j++) {
+          if (i - minus == j) {
+            array.push({ value: this.cellValues[i][j], row: i, column: j })
+          }
+        }
+      }
 
-    // array = []
+      // sprawdzanie wygranej
+      this.checkForLine(array);
+    }
 
-    // //z prawej gory w dol lewo
-    // for (let minus = 1; minus <= this.cellValues.length; minus++) {
-    //   for (let i = this.cellValues.length - 1; i >= 0; i--) {
-    //     for (let j = this.cellValues.length - 1; j >= 0; j--) {
-    //       if (i + j == this.cellValues.length - minus) {
-    //         // console.log(this.cellValues[j][i])
-    //         array.push(this.cellValues[j][i])
-    //       }
-    //     }
-    //   }
-    // }
-    // console.log(array)
+    for (let plus = 1; plus < this.cellValues.length; plus++) {
+      array = []
 
-    // array = []
-    // for (let plus = 0; plus < this.cellValues.length - 1; plus++) {
-    //   for (let i = this.cellValues.length - 1; i > 0; i--) {
-    //     for (let j = this.cellValues.length - 1; j > 0; j--) {
-    //       if (i + j == this.cellValues.length + plus) {
-    //         // console.log(this.cellValues[j][i])
-    //         array.push(this.cellValues[j][i])
-    //       }
-    //     }
-    //   }
-    // }
-    // console.log(array)
+      for (let i = 0; i < this.cellValues.length; i++) {
+        for (let j = 0; j < this.cellValues.length; j++) {
+          if (i + plus == j) {
+            array.push({ value: this.cellValues[i][j], row: i, column: j })
+          }
+        }
+      }
+
+      // sprawdzanie wygranej
+      this.checkForLine(array);
+    }
+
+
+    //z prawej gory w dol lewo
+    for (let minus = 1; minus <= this.cellValues.length; minus++) {
+      array = []
+
+      for (let i = this.cellValues.length - 1; i >= 0; i--) {
+        for (let j = this.cellValues.length - 1; j >= 0; j--) {
+          if (i + j == this.cellValues.length - minus) {
+            array.push({ value: this.cellValues[j][i], row: j, column: i })
+          }
+        }
+      }
+
+      // sprawdzanie wygranej
+      this.checkForLine(array);
+    }
+
+    for (let plus = 0; plus < this.cellValues.length - 1; plus++) {
+      array = []
+
+      for (let i = this.cellValues.length - 1; i > 0; i--) {
+        for (let j = this.cellValues.length - 1; j > 0; j--) {
+          if (i + j == this.cellValues.length + plus) {
+            array.push({ value: this.cellValues[j][i], row: j, column: i })
+          }
+        }
+      }
+
+      // sprawdzanie wygranej
+      this.checkForLine(array);
+    }
 
     // pionowo
     for (let i = 0; i < this.columns.length; i++) {
       array = []
+
       for (let j = 0; j < this.rows.length; j++) {
-        // console.log(this.cellValues[j][i])
         array.push({ value: this.cellValues[j][i], row: j, column: i })
       }
-      // console.log(array);
 
-      for (let k = 0; k < array.length; k++) {
-        if (array[k].value != '' && (array[k].value == "X" || array[k].value == "O") && k + this.winningScore <= array.length) {
-          let isWinningLine = true;
-
-          for (let l = 0; l < this.winningScore; l++) {
-            if (array[k].value != array[k + l].value) {
-              isWinningLine = false;
-            }
-          }
-
-          if (isWinningLine) {
-            console.log("wygrana")
-            this.addPoint(array[k].value);
-
-            for (let l = 0; l < this.winningScore; l++) {
-              this.cellValues[array[k + l].row][array[k + l].column] = this.cellValues[array[k + l].row][array[k + l].column].toLowerCase();
-            }
-
-            k += 4;
-          }
-        }
-      }
+      // sprawdzanie wygranej
+      this.checkForLine(array);
     }
 
     // poziomo
     for (let i = 0; i < this.rows.length; i++) {
       array = []
+
       for (let j = 0; j < this.columns.length; j++) {
-        // console.log(this.cellValues[i][j])
         array.push({ value: this.cellValues[i][j], row: i, column: j })
       }
+
       // sprawdzanie wygranej
-      for (let k = 0; k < array.length; k++) {
-        if (array[k].value != '' && (array[k].value == "X" || array[k].value == "O") && k + this.winningScore <= array.length) {
-          let isWinningLine = true;
-
-          for (let l = 0; l < this.winningScore; l++) {
-            if (array[k].value != array[k + l].value) {
-              isWinningLine = false;
-            }
-          }
-
-          if (isWinningLine) {
-            console.log("wygrana")
-            this.addPoint(array[k].value);
-
-            for (let l = 0; l < this.winningScore; l++) {
-              this.cellValues[array[k + l].row][array[k + l].column] = this.cellValues[array[k + l].row][array[k + l].column].toLowerCase();
-            }
-
-            k += 4;
-          }
-        }
-      }
+      this.checkForLine(array);
     }
   }
 
@@ -253,6 +221,31 @@ export class AppComponent {
     if (this.playerScores[player] === this.winningScore) {
       this.gameOver = true;
       this.winner = player;
+    }
+  }
+
+  checkForLine(array: any[]) {
+    for (let k = 0; k < array.length; k++) {
+      if (array[k].value != '' && (array[k].value == "X" || array[k].value == "O") && k + this.winningScore <= array.length) {
+        let isWinningLine = true;
+
+        for (let l = 0; l < this.winningScore; l++) {
+          if (array[k].value != array[k + l].value) {
+            isWinningLine = false;
+          }
+        }
+
+        if (isWinningLine) {
+          console.log("wygrana")
+          this.addPoint(array[k].value);
+
+          for (let l = 0; l < this.winningScore; l++) {
+            this.cellValues[array[k + l].row][array[k + l].column] = this.cellValues[array[k + l].row][array[k + l].column].toLowerCase();
+          }
+
+          k += 4;
+        }
+      }
     }
   }
 }
