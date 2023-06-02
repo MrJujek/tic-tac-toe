@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ai } from './components/ai/ai.component';
-import { GameBoardService } from './services/gameBoard.service';
 
 @Component({
   selector: 'app-root',
