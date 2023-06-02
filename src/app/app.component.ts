@@ -98,6 +98,7 @@ export class AppComponent {
 
       // sprawdzanie wygranej
       this.checkForLine(array);
+      this.getLines(array);
     }
 
     for (let plus = 1; plus < this.cellValues.length; plus++) {
@@ -113,6 +114,7 @@ export class AppComponent {
 
       // sprawdzanie wygranej
       this.checkForLine(array);
+      this.getLines(array);
     }
 
 
@@ -130,6 +132,7 @@ export class AppComponent {
 
       // sprawdzanie wygranej
       this.checkForLine(array);
+      this.getLines(array);
     }
 
     for (let plus = 0; plus < this.cellValues.length - 1; plus++) {
@@ -145,6 +148,7 @@ export class AppComponent {
 
       // sprawdzanie wygranej
       this.checkForLine(array);
+      this.getLines(array);
     }
 
     // pionowo
@@ -157,6 +161,7 @@ export class AppComponent {
 
       // sprawdzanie wygranej
       this.checkForLine(array);
+      this.getLines(array);
     }
 
     // poziomo
@@ -169,42 +174,181 @@ export class AppComponent {
 
       // sprawdzanie wygranej
       this.checkForLine(array);
+      this.getLines(array);
     }
   }
 
   // ruch komputera (na razie losowo)
   makeComputerMove() {
-    console.log(this.x4);
-    console.log(this.x3);
-    console.log(this.x2);
+    console.log("makeComputerMove");
 
-    console.log(this.o4);
-    console.log(this.o3);
-    console.log(this.o2);
+    let point1 = { x: 0, y: 0 };
+    let point2 = { x: 0, y: 0 };
+    let nextPoint = { x: 0, y: 0 };
+    let prevPoint = { x: 0, y: 0 };
 
-    if (this.playerScores["X"] > this.playerScores["O"]) {
-      console.log("wygrywa gracz lub remis");
+    let havePlayed = false;
 
-    } else {
-      console.log("wygrywa ai");
+    if (!havePlayed) {
+      this.x4.every(element => {
+        point1 = { x: element[0].column, y: element[0].row };
+        point2 = { x: element[1].column, y: element[1].row };
+        nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+
+        if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
+          this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
+          havePlayed = true;
+          return false;
+        } else {
+          prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
+            this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
+            havePlayed = true;
+            return false;
+          } else {
+            return true;
+          }
+        }
+      });
     }
 
-    const emptyCells = [];
-    for (let i = 0; i < this.rows.length; i++) {
-      for (let j = 0; j < this.columns.length; j++) {
-        if (this.cellValues[i][j] === '') {
-          emptyCells.push({ row: i, column: j });
+    if (!havePlayed) {
+      this.o4.every(element => {
+        point1 = { x: element[0].column, y: element[0].row };
+        point2 = { x: element[1].column, y: element[1].row };
+        nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+
+        if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
+          this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
+          havePlayed = true;
+          return false;
+        } else {
+          prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
+            this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
+            havePlayed = true;
+            return false;
+          } else {
+            return true;
+          }
+        }
+      });
+    }
+
+    if (!havePlayed) {
+      this.x3.every(element => {
+        point1 = { x: element[0].column, y: element[0].row };
+        point2 = { x: element[1].column, y: element[1].row };
+        nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+
+        if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
+          this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
+          havePlayed = true;
+          return false;
+        } else {
+          prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
+            this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
+            havePlayed = true;
+            return false;
+          } else {
+            return true;
+          }
+        }
+      });
+    }
+
+    if (!havePlayed) {
+      this.o3.every(element => {
+        point1 = { x: element[0].column, y: element[0].row };
+        point2 = { x: element[1].column, y: element[1].row };
+        nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+
+        if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
+          this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
+          havePlayed = true;
+          return false;
+        } else {
+          prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
+            this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
+            havePlayed = true;
+            return false;
+          } else {
+            return true;
+          }
+        }
+      });
+    }
+
+    if (!havePlayed) {
+      this.x2.every(element => {
+        point1 = { x: element[0].column, y: element[0].row };
+        point2 = { x: element[1].column, y: element[1].row };
+        nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+
+        if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
+          this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
+          havePlayed = true;
+          return false;
+        } else {
+          prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
+            this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
+            havePlayed = true;
+            return false;
+          } else {
+            return true;
+          }
+        }
+      });
+    }
+
+    if (!havePlayed) {
+      this.o2.every(element => {
+        point1 = { x: element[0].column, y: element[0].row };
+        point2 = { x: element[1].column, y: element[1].row };
+        nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+
+        if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
+          this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
+          havePlayed = true;
+          return false;
+        } else {
+          prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
+            this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
+            havePlayed = true;
+            return false;
+          } else {
+            return true;
+          }
+        }
+      });
+    }
+
+    if (!havePlayed) {
+      const emptyCells = [];
+      for (let i = 0; i < this.rows.length; i++) {
+        for (let j = 0; j < this.columns.length; j++) {
+          if (this.cellValues[i][j] === '') {
+            emptyCells.push({ row: i, column: j });
+          }
         }
       }
-    }
-    if (emptyCells.length > 0) {
-      const randomIndex = Math.floor(Math.random() * emptyCells.length);
-      const randomCell = emptyCells[randomIndex];
-      this.cellValues[randomCell.row][randomCell.column] = 'O';
 
-      if (!this.gameOver) {
-        this.switchPlayer();
+      if (emptyCells.length > 0) {
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        const randomCell = emptyCells[randomIndex];
+        this.cellValues[randomCell.row][randomCell.column] = 'O';
+      } else {
+        this.setDraw();
       }
+    }
+    this.ai();
+    if (!this.gameOver) {
+      this.switchPlayer();
+      return
     }
   }
 
@@ -278,7 +422,9 @@ export class AppComponent {
         }
       }
     }
+  }
 
+  getLines(array: any[]) {
     let resultArr = [] as any[];
     let currentArr = [] as any[];
 
