@@ -181,6 +181,15 @@ export class AppComponent {
   // ruch komputera (na razie losowo)
   makeComputerMove() {
     console.log("makeComputerMove");
+    console.log(this.x4);
+    console.log(this.x3);
+    console.log(this.x2);
+
+    console.log(this.o4);
+    console.log(this.o3);
+    console.log(this.o2);
+
+
 
     let point1 = { x: 0, y: 0 };
     let point2 = { x: 0, y: 0 };
@@ -194,6 +203,9 @@ export class AppComponent {
         point1 = { x: element[0].column, y: element[0].row };
         point2 = { x: element[1].column, y: element[1].row };
         nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+        if (nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length) {
+          return false;
+        }
 
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
@@ -201,6 +213,10 @@ export class AppComponent {
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (prevPoint.x < 0 || prevPoint.y < 0) {
+            return false;
+          }
+
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
@@ -217,6 +233,9 @@ export class AppComponent {
         point1 = { x: element[0].column, y: element[0].row };
         point2 = { x: element[1].column, y: element[1].row };
         nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+        if (nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length) {
+          return false;
+        }
 
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
@@ -224,6 +243,10 @@ export class AppComponent {
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (prevPoint.x < 0 || prevPoint.y < 0) {
+            return false;
+          }
+
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
@@ -240,6 +263,9 @@ export class AppComponent {
         point1 = { x: element[0].column, y: element[0].row };
         point2 = { x: element[1].column, y: element[1].row };
         nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+        if (nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length) {
+          return false;
+        }
 
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
@@ -247,6 +273,10 @@ export class AppComponent {
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (prevPoint.x < 0 || prevPoint.y < 0) {
+            return false;
+          }
+
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
@@ -263,6 +293,9 @@ export class AppComponent {
         point1 = { x: element[0].column, y: element[0].row };
         point2 = { x: element[1].column, y: element[1].row };
         nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+        if (nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length) {
+          return false;
+        }
 
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
@@ -270,6 +303,10 @@ export class AppComponent {
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (prevPoint.x < 0 || prevPoint.y < 0) {
+            return false;
+          }
+
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
@@ -286,6 +323,9 @@ export class AppComponent {
         point1 = { x: element[0].column, y: element[0].row };
         point2 = { x: element[1].column, y: element[1].row };
         nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+        if (nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length) {
+          return false;
+        }
 
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
@@ -293,6 +333,10 @@ export class AppComponent {
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (prevPoint.x < 0 || prevPoint.y < 0) {
+            return false;
+          }
+
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
@@ -309,6 +353,9 @@ export class AppComponent {
         point1 = { x: element[0].column, y: element[0].row };
         point2 = { x: element[1].column, y: element[1].row };
         nextPoint = { x: point2.x + (point2.x - point1.x), y: point2.y + (point2.y - point1.y) };
+        if (nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length) {
+          return false;
+        }
 
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
@@ -316,6 +363,10 @@ export class AppComponent {
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
+          if (prevPoint.x < 0 || prevPoint.y < 0) {
+            return false;
+          }
+
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
