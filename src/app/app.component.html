@@ -7,7 +7,7 @@
 <table border=1>
   <tr *ngFor="let row of rows; let rowIndex = index">
     <td *ngFor="let column of columns; let columnIndex = index" (click)="makeMove(rowIndex, columnIndex)"
-      [ngClass]="{ 'win-cell': isWinCell(rowIndex, columnIndex) }">
+      [ngClass]="{ 'win-cell': isWinCell(rowIndex, columnIndex), 'lastAiMove' : isLastAiMove(rowIndex, columnIndex) }">
       {{ getCellValue(rowIndex, columnIndex) }}
     </td>
   </tr>

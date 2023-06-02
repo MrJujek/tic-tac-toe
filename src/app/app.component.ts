@@ -16,14 +16,18 @@ export class AppComponent {
   winner: string = '';
   playerScores: { [key: string]: number } = { X: 0, O: 0 };
   winningScore: number = 5;
+  lastX: number | null = null;
+  lastY: number | null = null;
 
   x4: any[] = []
   x3: any[] = []
   x2: any[] = []
+  x1: any[] = []
 
   o4: any[] = []
   o3: any[] = []
   o2: any[] = []
+  o1: any[] = []
 
   start() {
     console.log("start");
@@ -210,6 +214,8 @@ export class AppComponent {
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
           havePlayed = true;
+          this.lastX = nextPoint.x;
+          this.lastY = nextPoint.y;
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
@@ -220,6 +226,8 @@ export class AppComponent {
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
+            this.lastX = prevPoint.x;
+            this.lastY = prevPoint.y;
             return false;
           } else {
             return true;
@@ -240,6 +248,8 @@ export class AppComponent {
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
           havePlayed = true;
+          this.lastX = nextPoint.x;
+          this.lastY = nextPoint.y;
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
@@ -250,6 +260,8 @@ export class AppComponent {
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
+            this.lastX = prevPoint.x;
+            this.lastY = prevPoint.y;
             return false;
           } else {
             return true;
@@ -270,6 +282,8 @@ export class AppComponent {
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
           havePlayed = true;
+          this.lastX = nextPoint.x;
+          this.lastY = nextPoint.y;
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
@@ -280,6 +294,8 @@ export class AppComponent {
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
+            this.lastX = prevPoint.x;
+            this.lastY = prevPoint.y;
             return false;
           } else {
             return true;
@@ -300,6 +316,8 @@ export class AppComponent {
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
           havePlayed = true;
+          this.lastX = nextPoint.x;
+          this.lastY = nextPoint.y;
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
@@ -310,6 +328,8 @@ export class AppComponent {
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
+            this.lastX = prevPoint.x;
+            this.lastY = prevPoint.y;
             return false;
           } else {
             return true;
@@ -330,6 +350,8 @@ export class AppComponent {
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
           havePlayed = true;
+          this.lastX = nextPoint.x;
+          this.lastY = nextPoint.y;
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
@@ -340,6 +362,8 @@ export class AppComponent {
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
+            this.lastX = prevPoint.x;
+            this.lastY = prevPoint.y;
             return false;
           } else {
             return true;
@@ -360,6 +384,8 @@ export class AppComponent {
         if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
           this.cellValues[nextPoint.y][nextPoint.x] = this.currentPlayer;
           havePlayed = true;
+          this.lastX = nextPoint.x;
+          this.lastY = nextPoint.y;
           return false;
         } else {
           prevPoint = { x: point1.x - (point2.x - point1.x), y: point1.y - (point2.y - point1.y) };
@@ -370,6 +396,8 @@ export class AppComponent {
           if (this.cellValues[prevPoint.y][prevPoint.x] == '') {
             this.cellValues[prevPoint.y][prevPoint.x] = this.currentPlayer;
             havePlayed = true;
+            this.lastX = prevPoint.x;
+            this.lastY = prevPoint.y;
             return false;
           } else {
             return true;
@@ -391,6 +419,8 @@ export class AppComponent {
       if (emptyCells.length > 0) {
         const randomIndex = Math.floor(Math.random() * emptyCells.length);
         const randomCell = emptyCells[randomIndex];
+        this.lastX = randomCell.column;
+        this.lastY = randomCell.row;
         this.cellValues[randomCell.row][randomCell.column] = 'O';
       } else {
         this.setDraw();
@@ -499,6 +529,13 @@ export class AppComponent {
 
     resultArr.forEach((arr) => {
       switch (arr.length) {
+        case 1:
+          if (arr[0].value == 'X') {
+            this.x1.push(arr);
+          } else {
+            this.o1.push(arr);
+          }
+          break;
         case 2:
           if (arr[0].value == 'X') {
             this.x2.push(arr);
@@ -522,5 +559,13 @@ export class AppComponent {
           break;
       }
     })
+  }
+
+  isLastAiMove(rowIndex: number, columnIndex: number): boolean {
+    if (rowIndex === this.lastY && columnIndex === this.lastX) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
