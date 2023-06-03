@@ -1,6 +1,6 @@
 <div>
-  Columns:<input type="text" [(ngModel)]="columnInput" value="20"><br>
-  Rows:<input type="text" [(ngModel)]="rowInput" value="20"><br>
+  Columns:<input type="number" [(ngModel)]="columnInput" value="20"><br>
+  Rows:<input type="number" [(ngModel)]="rowInput" value="20"><br>
   <button (click)="start()">Start</button>
 </div>
 
@@ -12,7 +12,7 @@
   <tr *ngFor="let row of rows; let rowIndex = index">
     <th>{{ rowIndex}}</th>
     <td *ngFor="let column of columns; let columnIndex = index" (click)="makeMove(rowIndex, columnIndex)"
-      [ngClass]="{ 'win-cell': isWinCell(rowIndex, columnIndex), 'lastAiMove' : isLastAiMove(rowIndex, columnIndex) }">
+      [ngClass]="{ 'win-cell': isWinCell(rowIndex, columnIndex), 'lastAiMove' : isLastAiMove(rowIndex, columnIndex), 'XColor' : isXPlayer(rowIndex, columnIndex), 'OColor':isOPlayer(rowIndex, columnIndex) }">
       {{ getCellValue(rowIndex, columnIndex) }}
     </td>
   </tr>

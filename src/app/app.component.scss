@@ -20,11 +20,19 @@ table td {
 }
 
 .lastAiMove {
-  background-color: yellow;
+  background-color: red !important;
 }
 
 th {
   padding: 5px;
   text-align: center;
   background-color: aqua;
+}
+
+.XColor {
+  background-color: lightgreen;
+}
+
+.OColor {
+  background-color: lightcoral;
 }

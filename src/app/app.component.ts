@@ -227,10 +227,10 @@ export class AppComponent {
           nextPoint = next_point;
           prevPoint = previous_point;
 
-          if (!(nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length))
-            console.log("nextPoint", nextPoint, "'" + this.cellValues[nextPoint.y][nextPoint.x] + "'");
-          if (!(prevPoint.x < 0 || prevPoint.y < 0))
-            console.log("prevPoint", prevPoint, "'" + this.cellValues[prevPoint.y][prevPoint.x] + "'");
+          // if (!(nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length))
+          //   console.log("nextPoint", nextPoint, "'" + this.cellValues[nextPoint.y][nextPoint.x] + "'");
+          // if (!(prevPoint.x < 0 || prevPoint.y < 0))
+          //   console.log("prevPoint", prevPoint, "'" + this.cellValues[prevPoint.y][prevPoint.x] + "'");
 
           if (!(nextPoint.x >= this.cellValues.length || nextPoint.y >= this.cellValues.length)) {
             if (this.cellValues[nextPoint.y][nextPoint.x] == '') {
@@ -502,5 +502,19 @@ export class AppComponent {
       next_point = { x: x2 + (x2 - x1), y: slope * (x2 + (x2 - x1)) + y_intercept };
     }
     return [previous_point, next_point];
+  }
+
+  isXPlayer(rowIndex: any, columnIndex: any) {
+    if (this.cellValues[parseInt(rowIndex)][parseInt(columnIndex)] == 'X') {
+      return true;
+    }
+    return false;
+  }
+
+  isOPlayer(rowIndex: any, columnIndex: any) {
+    if (this.cellValues[parseInt(rowIndex)][parseInt(columnIndex)] == 'O') {
+      return true;
+    }
+    return false;
   }
 }
