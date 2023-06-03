@@ -1,13 +1,6 @@
-table.board {
-  td {
-    padding: 10px;
-  }
-}
-
 .highlight {
   background-color: yellow;
 }
-
 
 table {
   border-collapse: collapse;
@@ -19,6 +12,7 @@ table td {
   cursor: pointer;
   width: 20px;
   height: 20px;
+  text-align: center;
 }
 
 .win-cell {
@@ -27,4 +21,10 @@ table td {
 
 .lastAiMove {
   background-color: yellow;
+}
+
+th {
+  padding: 5px;
+  text-align: center;
+  background-color: aqua;
 }

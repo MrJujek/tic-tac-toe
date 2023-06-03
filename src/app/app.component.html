@@ -4,8 +4,13 @@
   <button (click)="start()">Start</button>
 </div>
 
-<table border=1>
+<table *ngIf="gameStarted" border=1>
+  <tr>
+    <th>#</th>
+    <th *ngFor="let column of columns">{{ column-1 }}</th>
+  </tr>
   <tr *ngFor="let row of rows; let rowIndex = index">
+    <th>{{ rowIndex}}</th>
     <td *ngFor="let column of columns; let columnIndex = index" (click)="makeMove(rowIndex, columnIndex)"
       [ngClass]="{ 'win-cell': isWinCell(rowIndex, columnIndex), 'lastAiMove' : isLastAiMove(rowIndex, columnIndex) }">
       {{ getCellValue(rowIndex, columnIndex) }}
