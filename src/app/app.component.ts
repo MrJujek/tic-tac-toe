@@ -42,6 +42,8 @@ export class AppComponent {
     this.winner = '';
     this.playerScores = { X: 0, O: 0 };
     this.gameStarted = true;
+    this.lastX = null;
+    this.lastY = null;
   }
 
   initializeCellValues(rows: number, columns: number): string[][] {
